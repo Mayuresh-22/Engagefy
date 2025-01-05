@@ -103,8 +103,9 @@ class DBReadComponent(Component):
             "X-Cassandra-Token": db_token
         }
         resp = requests.get(db_url, headers=headers)
-        data = str(resp.json())
-        return Message(text=data)
+        if resp.status_code != 200:
+            raise Exception("error")
+        return Message(text=str(resp.json()))
 
 
 # # Define how to use the inputs and outputs
