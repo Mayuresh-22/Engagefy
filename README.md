@@ -1,4 +1,4 @@
-# Social Media Performance Analysis Platform
+# Social Media Performance Analysis Platform 📊
 
 ## Overview
 The **Social Media Performance Analysis Platform** is a robust web application designed to evaluate and generate insights into social media engagement. With a focus on user experience, our platform empowers users to analyze their profiles and specific post types with precision and ease. 
@@ -20,7 +20,9 @@ We enhanced the original assignment with the following functionalities:
 ---
 
 ## Project Architecture
-**[Architecture Diagram Placeholder: Include a visual diagram here.]**
+<img width="500" alt="Instagram Analysis - Sample flow" src="https://github.com/user-attachments/assets/be288578-49e2-48d3-90c6-a6f304b6b240" />
+
+
 - The architecture connects the React frontend, DataStax DB, Langflow workflows, and Gemini insights generation.
 - Add the architecture illustration here once finalized. You can use tools like Lucidchart or Figma for visual clarity.
 
@@ -38,46 +40,35 @@ We enhanced the original assignment with the following functionalities:
 
 ---
 
-## How to Use
+## How It Works ✨
 
-### Steps:
-1. **Clone the Repository**:
-   ```bash
-   git clone <repository-link>
-   cd social-media-analysis
-   ```
+### Step-by-Step Description:
+1. **Data Collection**:
+   - The platform uses a third-party API to scrape the Instagram Profile Posts of the User.
+   - Engagement data such as likes, comments, and shares are fetched.
 
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
+2. **Data Storage**:
+   - The scraped data is stored securely in **DataStax Astra DB (Non-Vector based)**, ensuring scalability and reliability.
 
-3. **Set Up Database**:
-   - Create a DataStax Astra DB instance.
-   - Populate the database with mock social media engagement data.
+3. **Workflow Management**:
+   - **Langflow** is responsibel for the workflows, including data processing and integration with GPT model.
 
-4. **Run the Frontend**:
-   ```bash
-   npm start
-   ```
+4. **Insights Generation**:
+   - The **Gemini model** evaluates the metrics and generates actionable insights based on post types and user profiles.
 
-5. **Workflow Setup**:
-   - Use Langflow to define workflows for analyzing post metrics.
-   - Integrate the Gemini model for generating insights.
-
-6. **Usage**:
-   - Upload a profile name for overall performance analysis.
-   - Choose a specific post type and click **Analyze** to view detailed insights.
+5. **User Interaction**:
+   - Users can upload their profile name as well as choose specific post types for analysis.
+   - The platform displays engagement metrics and insights in an easy-to-read format.
 
 ---
 
-## Example Insights
+## Example Insights 📊
 - **Carousel Engagement**: Carousel posts have 20% higher engagement than static images.
 - **Reels Performance**: Reels generate twice the comments compared to other post types.
 
 ---
 
-## Installation Illustration
+## Installation Illustration 🛠️
 
 ```mermaid
 graph TD;
@@ -90,27 +81,14 @@ graph TD;
 
 ---
 
-## Contributing
-We welcome contributions! To contribute:
-- Fork the repository.
-- Create a feature branch.
-- Submit a pull request.
-
----
-
-## License
-This project is licensed under the MIT License.
-
----
-
-## Contact
+## Contact 📬
 For inquiries or support, contact:
 - **Email**: support@socialmediaanalysis.com
 - **GitHub Issues**: <repository-issues-link>
 
 ---
 
-## Acknowledgments
+## Acknowledgments 🙌
 - **Langflow** for workflow management.
 - **DataStax** for robust database solutions.
 - **Gemini** for generative insights.
