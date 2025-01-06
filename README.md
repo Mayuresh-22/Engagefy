@@ -1,7 +1,7 @@
-# Social Media Performance Analysis Platform 📊
+# Engagefy - Social Media Performance Analysis Platform 📊
 
 ## Overview
-The **Social Media Performance Analysis Platform** is a robust web application designed to evaluate and generate insights into social media engagement. With a focus on user experience, our platform empowers users to analyze their profiles and specific post types with precision and ease. 
+The **Engagefy** is a robust web application designed to evaluate and generate insights into social media engagement. With a focus on user experience, our platform empowers users to analyze their profiles and specific post types with precision and ease. 
 
 ### Key Features:
 - **Frontend**: Developed using React for a seamless and interactive user interface.
@@ -95,5 +95,3 @@ For inquiries or support, contact:
 - **Third-Party API** for enabling anonymous Instagram data scraping.
 
 ---
-
-> **Note**: Remember to replace placeholders (e.g., links, contact details) with actual data before deploying or submitting the project.
