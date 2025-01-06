@@ -68,7 +68,7 @@ We enhanced the original assignment with the following functionalities:
 
 ---
 
-## Installation Illustration 🛠️
+## Working Illustration 🛠️
 
 ```mermaid
 graph TD;
