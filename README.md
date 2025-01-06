@@ -1,39 +1,121 @@
-## Leverl-SuperMind-2025
-This repo contains code of online assignment for Level SuperMind Hackathon 2025
-## Social Media Performance Analysis
-
-![Project Logo](https://via.placeholder.com/150) <!-- Replace with your project logo -->
+# Social Media Performance Analysis Platform
 
 ## Overview
+The **Social Media Performance Analysis Platform** is a robust web application designed to evaluate and generate insights into social media engagement. With a focus on user experience, our platform empowers users to analyze their profiles and specific post types with precision and ease. 
 
-The **Social Media Performance Analysis** project is designed to develop a basic analytics module that utilizes **Langflow** and **DataStax** to analyze engagement data from mock social media accounts. The objective is to create a workflow that can fetch, analyze, and provide insights into various types of social media posts based on user-defined metrics.
+### Key Features:
+- **Frontend**: Developed using React for a seamless and interactive user interface.
+- **Database**: DataStax Astra DB powers robust and efficient data storage and retrieval.
+- **Workflow Creation**: Langflow integrates to manage workflows and GPT integration for insight generation.
+- **Generative Model**: Gemini provides advanced insights by evaluating engagement metrics.
+- **Third-Party Integration**: Anonymous Instagram data scraping using a secure API for profile and post-type analysis.
 
-### Submission Deadline
-**January 8th**
+---
 
-## Tools and Technologies
+## Modified Features
+We enhanced the original assignment with the following functionalities:
+- **Profile Analysis**: Users can upload their profile name to analyze their overall performance.
+- **Post-Specific Analysis**: Analyze engagement metrics for a particular type of post (carousel, reels, static images).
 
-- **DataStax Astra DB**: For database operations and data storage.
-- **Langflow**: For workflow creation and integration with GPT for generating insights.
+---
 
-## Project Objectives
+## Project Architecture
+**[Architecture Diagram Placeholder: Include a visual diagram here.]**
+- The architecture connects the React frontend, DataStax DB, Langflow workflows, and Gemini insights generation.
+- Add the architecture illustration here once finalized. You can use tools like Lucidchart or Figma for visual clarity.
 
-1. **Fetch Engagement Data**:
-   - Create a small dataset simulating social media engagement (e.g., likes, shares, comments, post types).
-   - Store this data in DataStax Astra DB.
+---
 
-2. **Analyze Post Performance**:
-   - Construct a simple flow using Langflow that:
-     - Accepts post types (e.g., carousel, reels, static images) as input.
-     - Queries the dataset in Astra DB to calculate average engagement metrics for each post type.
+## Technologies Used
 
-3. **Provide Insights**:
-   - Utilize GPT integration in Langflow to generate insights based on the analyzed data.
-   - Example outputs:
-     - "Carousel posts have 20% higher engagement than static posts."
-     - "Reels drive 2x more comments compared to other formats."
+| Component        | Technology/Tool       |
+|------------------|-----------------------|
+| **Frontend**     | React                |
+| **Database**     | DataStax Astra DB    |
+| **Workflow**     | Langflow             |
+| **Insights**     | Gemini Model         |
+| **API**          | Third-party Instagram Data Scraper |
 
-## Architecture
+---
 
-![Architecture Diagram](https://via.placeholder.com/600x400) <!-- Placeholder for architecture diagram -->
-*Insert architecture diagram here*
+## How to Use
+
+### Steps:
+1. **Clone the Repository**:
+   ```bash
+   git clone <repository-link>
+   cd social-media-analysis
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Set Up Database**:
+   - Create a DataStax Astra DB instance.
+   - Populate the database with mock social media engagement data.
+
+4. **Run the Frontend**:
+   ```bash
+   npm start
+   ```
+
+5. **Workflow Setup**:
+   - Use Langflow to define workflows for analyzing post metrics.
+   - Integrate the Gemini model for generating insights.
+
+6. **Usage**:
+   - Upload a profile name for overall performance analysis.
+   - Choose a specific post type and click **Analyze** to view detailed insights.
+
+---
+
+## Example Insights
+- **Carousel Engagement**: Carousel posts have 20% higher engagement than static images.
+- **Reels Performance**: Reels generate twice the comments compared to other post types.
+
+---
+
+## Installation Illustration
+
+```mermaid
+graph TD;
+    A[User] --> B[React Frontend];
+    B --> C[Langflow Workflow];
+    C --> D[DataStax Astra DB];
+    C --> E[Gemini Insights Model];
+    E --> F[Insights]
+```
+
+---
+
+## Contributing
+We welcome contributions! To contribute:
+- Fork the repository.
+- Create a feature branch.
+- Submit a pull request.
+
+---
+
+## License
+This project is licensed under the MIT License.
+
+---
+
+## Contact
+For inquiries or support, contact:
+- **Email**: support@socialmediaanalysis.com
+- **GitHub Issues**: <repository-issues-link>
+
+---
+
+## Acknowledgments
+- **Langflow** for workflow management.
+- **DataStax** for robust database solutions.
+- **Gemini** for generative insights.
+- **Third-Party API** for enabling anonymous Instagram data scraping.
+
+---
+
+> **Note**: Remember to replace placeholders (e.g., links, contact details) with actual data before deploying or submitting the project.
