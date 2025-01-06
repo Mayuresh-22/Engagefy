@@ -1,6 +1,6 @@
-**# Leverl-SuperMind-2025
+## Leverl-SuperMind-2025
 This repo contains code of online assignment for Level SuperMind Hackathon 2025
-**# Social Media Performance Analysis
+## Social Media Performance Analysis
 
 ![Project Logo](https://via.placeholder.com/150) <!-- Replace with your project logo -->
 
