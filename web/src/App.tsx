@@ -13,10 +13,49 @@ import {
   SelectValue,
 } from "./components/ui/select"
 import { Stars } from 'lucide-react'
+import LangflowClient from './services/langflow'
 
 export default function SocialMediaAnalysis() {
   const [accountLink, setAccountLink] = useState('')
-  const [postType, setPostType] = useState('')
+  // const [postType, setPostType] = useState('')
+
+  const handleDoMagic = async () => {
+    const flowIdOrName = import.meta.env.VITE_FLOW_ID_OR_NAME;
+    const langflowId = import.meta.env.VITE_LANGFLOW_ID;
+    const applicationToken = import.meta.env.VITE_LANGFLOW_APPLICATION_TOKEN;
+    const langflowClient = new LangflowClient(
+      applicationToken,
+      langflowId,
+      flowIdOrName
+    );
+  
+    try {
+      const tweaks = {
+        "TextInput-1TC5x": {
+          input_value: "darshan_gentyal",
+        },
+        "TextInput-uB9VA": {
+          input_value: "Reel",
+        }
+      };
+      const response = await langflowClient.runFlow(
+        flowIdOrName,
+        langflowId,
+        "chat",
+        "chat",
+        tweaks
+      );
+      if (response && response.outputs) {
+        const flowOutputs = response.outputs[0];
+        const firstComponentOutputs = flowOutputs.outputs[0];
+        const output = firstComponentOutputs.outputs.message;
+  
+        console.log("Final Output:", output.message.text);
+      }
+    } catch (error) {
+      console.error("Main Error", error.message);
+    }
+  }
 
   return (
     <div className="min-h-screen p-12 bg-mesh lato-regular">
@@ -49,6 +88,7 @@ export default function SocialMediaAnalysis() {
 
             <Button
               className="bg-gradient-to-r from-pink-500 to-violet-600 text-white hover:opacity-90 px-6 hover:from-pink-600 hover:to-violet-700 hover:scale-105 transition-all ease-in-out duration-300"
+              onClick={handleDoMagic}
             >
               Do Magic
               <Stars className="w-4 h-4 ml-2" />
