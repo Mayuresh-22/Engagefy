@@ -17,7 +17,7 @@ import LangflowClient from './services/langflow'
 
 export default function SocialMediaAnalysis() {
   const [accountLink, setAccountLink] = useState('')
-  // const [postType, setPostType] = useState('')
+  const [postType, setPostType] = useState('')
 
   const handleDoMagic = async () => {
     const flowIdOrName = import.meta.env.VITE_FLOW_ID_OR_NAME;
@@ -32,10 +32,10 @@ export default function SocialMediaAnalysis() {
     try {
       const tweaks = {
         "TextInput-1TC5x": {
-          input_value: "darshan_gentyal",
+          input_value: accountLink,
         },
         "TextInput-uB9VA": {
-          input_value: "Reel",
+          input_value: postType,
         }
       };
       const response = await langflowClient.runFlow(

@@ -14,7 +14,7 @@ class LangflowClient {
 
   async post(
     endpoint: string,
-    body: Record<string, any>,
+    body: Record<string, string | Record<string, string>>,
     headers: Record<string, string> = { "Content-Type": "application/json" }
   ) {
     headers["Authorization"] = `Bearer ${this.applicationToken}`;
