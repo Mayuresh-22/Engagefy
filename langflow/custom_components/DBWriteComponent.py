@@ -1,15 +1,18 @@
+import asyncio
+import uuid
+import httpx
+from langflow.helpers.data import data_to_text
+from langflow.schema.message import Message
 from langflow.template import Input, Output
 from langflow.custom import Component
-from concurrent.futures import ThreadPoolExecutor
-import requests
-import os
+from langflow.schema import Data
 
 
 class DBWriteComponent(Component):
-    display_name = "Database Read Component"
-    description = "Reads data from an Astra DB table."
+    display_name = "Database Write Component"
+    description = "Writes data to an Astra DB table."
     name = "DBWriteComponent"
-    icon = "code"
+    icon = "database"
     PAGE_SIZE = 10
     processed_data: list[dict[str, any]] = []
 
@@ -20,96 +23,101 @@ class DBWriteComponent(Component):
             required=True,
             placeholder="Enter application token",
             multiline=False,
-            info="This is the application token for the Astra DB.",
+            info="The application token for the Astra DB.",
         ),
         Input(
             name="db_id",
-            display_name="Astra DB id",
+            display_name="Astra DB ID",
             required=True,
             multiline=False,
-            info="This is the id for the Astra DB.",
+            info="The ID for the Astra DB.",
         ),
         Input(
             name="db_region",
             display_name="Astra DB Region",
             required=True,
             multiline=False,
-            info="This is the region for the Astra DB.",
+            info="The region for the Astra DB.",
         ),
         Input(
             name="keyspace",
             display_name="Keyspace",
-            info="Table Keyspace (or AstraDB namespace).",
             required=True,
-        ),
-        Input(
-            name="keyspace",
-            display_name="Keyspace",
-            info="Table Keyspace (or AstraDB namespace).",
-            required=True,
+            info="The keyspace (or namespace) of the Astra DB table.",
         ),
         Input(
             name="table_name",
             display_name="Table Name",
-            info="The name of the table (or AstraDB collection) where vectors will be stored.",
-            load_from_db=True,
             required=True,
+            info="The name of the table where data will be written.",
         ),
         Input(
             name="data_to_write",
             display_name="Data to Write",
-            field_type="Data",
-            required=False,
-            info="The Data with dict {data: [<records to store>]} to write to the database.",
-            input_type=["Data"],
+            field_type="Message",
+            required=True,
+            info="A list of records to store in the database. Format: {'data': [<records>]}",
+            input_types=["text"]
         ),
     ]
 
     outputs = [
         Output(
-            display_name="DB response",
+            display_name="DB Response",
             name="results",
             method="process_data",
         ),
     ]
 
     def build_url(self) -> str:
-        DB_ID = self.db_id
-        DB_REGION = self.db_region
-        keyspace = self.keyspace
-        table_name = self.table_name
-        return f"https://{DB_ID}-{DB_REGION}.apps.astra.datastax.com/api/rest/v2/keyspaces/{keyspace}/{table_name}"
+        """
+        Constructs the Astra DB API URL based on the provided inputs.
+        """
+        return (
+            f"https://{self.db_id}-{self.db_region}.apps.astra.datastax.com/"
+            f"api/rest/v2/keyspaces/{self.keyspace}/{self.table_name}"
+        )
 
-    def process_data(self) -> list[dict[str, any]]:
-        pass
-
-    def write_row(self, row: dict) -> bool:
-        db_url = self.build_url()
-        db_token = self.db_token
+    async def write_row(self, client: httpx.AsyncClient, row: dict) -> dict:
+        """
+        Writes a single row to the database and returns the result.
+        """
+        row["id"] = str(uuid.uuid4())  # Ensure the row has a unique ID
+        url = self.build_url()
         headers = {
             "accept": "application/json",
-            "X-Cassandra-Token": db_token
+            "X-Cassandra-Token": self.db_token,
+            "Content-Type": "application/json",
         }
-        body = row
+
         try:
-            resp = requests.post(db_url, headers=headers, data=body)
-            if resp.status_code != 200:
-                raise Exception("error")
-            return True
-        except Exception as e:
-            print(e)
-            return False
+            response = await client.post(url, headers=headers, json=row)
+            response.raise_for_status()
+            return {"status": "success", "value": response.json()}
+        except httpx.RequestError as e:
+            return {"status": "error", "value": str(e)}
+        except httpx.HTTPStatusError as e:
+            return {"status": "error", "value": response.json() if response else str(e)}
 
-    def write_rows(self, rows: list[dict]) -> list[bool]:
-        MAX_THREADS = min(os.cpu_count(), len(rows))  # max threads to use
-        with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-            resp_list = list(executor.map(self.write_row, rows))
-        # if 50% of the rows are written, return True
-        success_rate_list = [1 if resp else 0 for resp in resp_list]
-        if sum(success_rate_list) >= len(rows) / 2:
-            return True
-        return False
+    async def write_rows(self, rows: list[dict]) -> list[dict]:
+        """
+        Writes multiple rows to the database concurrently and returns the results.
+        """
+        async with httpx.AsyncClient() as client:
+            tasks = [self.write_row(client, row) for row in rows]
+            return await asyncio.gather(*tasks)
 
-
-# # Define how to use the inputs and outputs
-# component = DBWriteComponent()
+    def process_data(self) -> Message:
+        """
+        Processes the input data and writes rows to the database.
+        """
+        if not isinstance(self.data_to_write, Message):
+            return Message(text="error")
+        rows_to_write = eval(self.data_to_write.text)
+        # Execute asynchronous database writes
+        write_response = asyncio.run(self.write_rows(rows_to_write))
+        # return error response if more than 50% of the writes failed
+        error_count = sum(1 for response in write_response if response["status"] == "error")
+        if error_count > len(write_response) / 2:
+            return Message(text="error")
+        return Message(text="success")

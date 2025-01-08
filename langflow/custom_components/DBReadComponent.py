@@ -95,7 +95,7 @@ class DBReadComponent(Component):
 
         return f"https://{DB_ID}-{DB_REGION}.apps.astra.datastax.com/api/rest/v2/keyspaces/{keyspace}/{table_name}/{primary_key}?{fields if fields else ''}&page-size={self.PAGE_SIZE}&raw=true&count=DESC"
 
-    def get_rows(self) -> Message:
+    def get_rows(self) -> list:
         db_url = self.build_url()
         db_token = self.db_token
         headers = {
@@ -105,7 +105,7 @@ class DBReadComponent(Component):
         resp = requests.get(db_url, headers=headers)
         if resp.status_code != 200:
             raise Exception("error")
-        return Message(text=str(resp.json()))
+        return resp.json()
 
 
 # # Define how to use the inputs and outputs
