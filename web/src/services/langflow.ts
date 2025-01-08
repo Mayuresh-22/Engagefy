@@ -38,7 +38,9 @@ class LangflowClient {
       }
       return responseMessage;
     } catch (error) {
-      console.error("Request Error:", error.message);
+      if (error instanceof Error) {
+        console.error("Request Error:", error.message);
+      }
       throw error;
     }
   }
