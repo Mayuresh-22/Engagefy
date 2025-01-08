@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import LangflowClient from "./services/langflow";
+import { cors } from "hono/cors";
 
 type Bindings = {
   FLOW_ID_OR_NAME: string;
@@ -11,6 +12,8 @@ type Bindings = {
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
+
+app.use("*", cors());
 
 app.get("/", (c) => {
   return c.text("Hello Engagefy!");

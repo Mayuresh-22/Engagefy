@@ -1,0 +1,9 @@
+# Langflow Configurations variables:
+LANGFLOW_BASE_URL=https://api.langflow.your-instance.com
+FLOW_ID_OR_NAME=your-flow-id
+LANGFLOW_ID=your-langflow-id
+LANGFLOW_APPLICATION_TOKEN=your-langflow-token
+
+# Groq API key variable:
+GROQ_API_KEY=your-groq-api-key
+GROQ_LLM=llama-3.1-8b-instant
