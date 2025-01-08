@@ -53,7 +53,9 @@ export default function SocialMediaAnalysis() {
         console.log("Final Output:", output.message.text);
       }
     } catch (error) {
-      console.error("Main Error", error.message);
+      if (error instanceof Error) {
+        console.error("Main Error", error.message);
+      }
     }
   }
 
