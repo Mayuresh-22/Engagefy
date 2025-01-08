@@ -4,9 +4,15 @@ class LangflowClient {
   private langflowId: string;
   private flowId: string;
   private applicationToken: string;
-  private baseURL: string = import.meta.env.VITE_LANGFLOW_API_BASE_URL;
+  private baseURL: string;
 
-  constructor(applicationToken: string, langflowId: string, flowId: string) {
+  constructor(
+    baseUrl: string,
+    applicationToken: string,
+    langflowId: string,
+    flowId: string
+  ) {
+    this.baseURL = baseUrl;
     this.applicationToken = applicationToken;
     this.langflowId = langflowId;
     this.flowId = flowId;
