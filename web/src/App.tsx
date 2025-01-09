@@ -80,7 +80,7 @@ export default function SocialMediaAnalysis() {
         <div className="max-w-lg space-y-4 w-full">
           <Input
             type="text"
-            placeholder="Enter social media account username/link"
+            placeholder="Enter Instagram account username/link"
             value={accountUsernameOrLink}
             onChange={(e) => setAccountUsernameOrLink(e.target.value)}
             className="w-full bg-white/70 border-0 placeholder:text-gray-600"
