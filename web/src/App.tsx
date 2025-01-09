@@ -34,20 +34,42 @@ export default function SocialMediaAnalysis() {
     setResult(null);
   };
 
+  const handleUsernameOrLinkValidation = (value: string): string | boolean => {
+    const usernameRegex = /^[a-zA-Z0-9_.-]*$/;
+    const linkRegex = /(https?:\/\/)?(www\.)?instagram\.com\/[A-Za-z0-9_.]{1,30}\/?/g;
+    if (linkRegex.test(value)) {
+      const username = value.split("/").pop();
+      if (usernameRegex.test(username as string)) return username as string;
+    }
+    if (usernameRegex.test(value)) {
+      return value;
+    }
+    return false;
+  }
+
   const handleDoMagic = async () => {
     setLoading(true);
     try {
+      handleClear();
       if (!handleValidation()) {
         setLoading(false);
         setError("Please enter valid details");
         return;
       }
-      handleClear();
+
+      const validatedUsername = handleUsernameOrLinkValidation(accountUsernameOrLink);
+      if (!validatedUsername) {
+        setLoading(false);
+        setError("Please enter valid Instagram account username/link");
+        return;
+      }
+
       const url = new URL(
         `${import.meta.env.VITE_APP_SERVER_URL}${import.meta.env.VITE_APP_MY_ENGAGEFY_ENDPOINT
         }`
       );
-      url.searchParams.append("username", accountUsernameOrLink);
+
+      url.searchParams.append("username", validatedUsername as string);
       postType && url.searchParams.append("post_type", postType);
 
       const response = await fetch(url.toString());
