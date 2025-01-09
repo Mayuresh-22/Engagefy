@@ -1,30 +1,32 @@
-# Engagefy - Social Media Performance Analysis Platform 📊
+# Engagefy - Social Media Performance Analysis Tool
+#### Level SuperMind Hackathon 2025 OA
+
+![image](https://github.com/user-attachments/assets/94aea794-db5d-4640-908b-f5a4e0d120b9)
+
 
 ## Overview
-The **Engagefy** is a robust web application designed to evaluate and generate insights into social media engagement. With a focus on user experience, our platform empowers users to analyze their profiles and specific post types with precision and ease. 
+**Engagefy** is an AI-powered tool designed to evaluate and generate insights into social media engagement. Focusing on user experience, our platform empowers users to analyze their profiles and specific post types with precision and ease. 
 
 ### Key Features:
 - **Frontend**: Developed using React for a seamless and interactive user interface.
-- **Database**: DataStax Astra DB powers robust and efficient data storage and retrieval.
+- **Database**: DataStax Astra DB powers distributed and efficient data storage and retrieval.
 - **Workflow Creation**: Langflow integrates to manage workflows and GPT integration for insight generation.
-- **Generative Model**: Gemini provides advanced insights by evaluating engagement metrics.
-- **Third-Party Integration**: Anonymous Instagram data scraping using a secure API for profile and post-type analysis.
+- **Generative Model**: GPT provides advanced insights by evaluating engagement metrics.
+- **Third-Party Integration**: Anonymous Instagram data scraping using a [secure API](https://rapidapi.com/social-api1-instagram/api/instagram-scraper-api2) for profile and post-type analysis.
 
 ---
 
 ## Modified Features
 We enhanced the original assignment with the following functionalities:
-- **Profile Analysis**: Users can upload their profile name to analyze their overall performance.
-- **Post-Specific Analysis**: Analyze engagement metrics for a particular type of post (carousel, reels, static images).
+- **Profile Analysis**: Users can only analyse their overall performance with their Instagram account username/link.
+- **Post-Specific Analysis**: Get performance insights for a particular post type (carousel, reels, static images).
 
 ---
 
 ## Project Architecture
 <img width="500" alt="Instagram Analysis - Sample flow" src="https://github.com/user-attachments/assets/be288578-49e2-48d3-90c6-a6f304b6b240" />
 
-
-- The architecture connects the React frontend, DataStax DB, Langflow workflows, and Gemini insights generation.
-- Add the architecture illustration here once finalized. You can use tools like Lucidchart or Figma for visual clarity.
+- The architecture connects the React frontend, DataStax DB, Langflow workflows, and OpenAI's GPT for insights generation.
 
 ---
 
@@ -35,26 +37,26 @@ We enhanced the original assignment with the following functionalities:
 | **Frontend**     | React                |
 | **Database**     | DataStax Astra DB    |
 | **Workflow**     | Langflow             |
-| **Insights**     | Gemini Model         |
-| **API**          | Third-party Instagram Data Scraper |
+| **Insights**     | OpenAI's GPT Model         |
+| **API**          | [Third-party Instagram Data Scraper](https://rapidapi.com/social-api1-instagram/api/instagram-scraper-api2) |
 
 ---
 
 ## How It Works ✨
 
-### Step-by-Step Description:
+### Step-by-Step Process:
 1. **Data Collection**:
-   - The platform uses a third-party API to scrape the Instagram Profile Posts of the User.
+   - The platform uses a [third-party API](https://rapidapi.com/social-api1-instagram/api/instagram-scraper-api2) to scrape the Instagram Profile Posts of the User.
    - Engagement data such as likes, comments, and shares are fetched.
 
 2. **Data Storage**:
    - The scraped data is stored securely in **DataStax Astra DB (Non-Vector based)**, ensuring scalability and reliability.
 
 3. **Workflow Management**:
-   - **Langflow** is responsibel for the workflows, including data processing and integration with GPT model.
+   - **Langflow** is responsible for the workflows, including data processing and integration with the GPT model.
 
 4. **Insights Generation**:
-   - The **Gemini model** evaluates the metrics and generates actionable insights based on post types and user profiles.
+   - The **OpenAI's GPT model** evaluates the metrics and generates actionable insights based on post types and user profiles.
 
 5. **User Interaction**:
    - Users can upload their profile name as well as choose specific post types for analysis.
@@ -75,7 +77,7 @@ graph TD;
     A[User] --> B[React Frontend];
     B --> C[Langflow Workflow];
     C --> D[DataStax Astra DB];
-    C --> E[Gemini Insights Model];
+    C --> E[OpenAI's GPT Model];
     E --> F[Insights]
 ```
 
@@ -83,15 +85,15 @@ graph TD;
 
 ## Contact 📬
 For inquiries or support, contact:
-- **Email**: support@socialmediaanalysis.com
-- **GitHub Issues**: <repository-issues-link>
+- **Email**: mayureshchoudhary22@gmail.com
+- **GitHub Issues**: https://github.com/Mayuresh-22/Engagefy
 
 ---
 
 ## Acknowledgments 🙌
 - **Langflow** for workflow management.
 - **DataStax** for robust database solutions.
-- **Gemini** for generative insights.
+- **OpenAI's GPT** for generative insights.
 - **Third-Party API** for enabling anonymous Instagram data scraping.
 
 ---
