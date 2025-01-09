@@ -66,8 +66,8 @@ export default function SocialMediaAnalysis() {
   };
 
   return (
-    <div className="min-h-screen p-12 bg-mesh lato-regular">
-      <div className="h-[calc(100vh-96px)] w-[calc(100vw-96px)] rounded-3xl backdrop-blur-md bg-white/30 shadow-lg border border-white/40 p-12 flex flex-col justify-center items-center">
+    <div className="min-h-screen p-12 bg-mesh lato-regular relative">
+      <div className="min-h-[calc(100vh-96px)] w-[calc(100vw-96px)] rounded-3xl backdrop-blur-md bg-white/30 shadow-lg border border-white/40 p-12 flex flex-col justify-center items-center overflow-y-auto relative pb-24">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Engagefy</h2>
         <h1 className="text-xl  text-gray-800 mb-6">
           Smarter Social Media Analysis with AI
@@ -138,9 +138,11 @@ export default function SocialMediaAnalysis() {
             </div>
           )}
         </div>
-        <div className="bottom-5 absolute w-full text-center text-black text-sm">
-          <span>by Mayuresh, Devang, Advait</span>
-        </div>
+        <footer className="fixed bottom-0 left-0 right-0 p-4 text-center text-gray-800 text-sm bg-white/5 backdrop-blur-md">
+          <p>
+            by <span className="font-semibold">Mayuresh, Devang, Advait</span>
+          </p>
+        </footer>
       </div>
     </div>
   );
