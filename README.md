@@ -1,5 +1,5 @@
 # Engagefy - Social Media Performance Analysis Tool
-#### Level SuperMind Hackathon 2025 OA Submission
+#### Level SuperMind Hackathon 2025 OA
 
 ![image](https://github.com/user-attachments/assets/94aea794-db5d-4640-908b-f5a4e0d120b9)
 
