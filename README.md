@@ -24,7 +24,8 @@ We enhanced the original assignment with the following functionalities:
 ---
 
 ## Project Architecture
-<img width="500" alt="Instagram Analysis - Sample flow" src="https://github.com/user-attachments/assets/be288578-49e2-48d3-90c6-a6f304b6b240" />
+<img alt="Instagram Analysis - Sample flow" src="https://github.com/user-attachments/assets/eeeb0f15-8496-42ea-a29f-c0a38aa4aeca" />
+
 
 - The architecture connects the React frontend, DataStax DB, Langflow workflows, and OpenAI's GPT for insights generation.
 
